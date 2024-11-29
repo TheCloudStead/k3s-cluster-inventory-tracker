@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+ name: python-script-cronjob
+spec:
+ schedule: “*/15 * * * *” # Every 15 minutes
+ jobTemplate:
+ spec:
+ ttlSecondsAfterFinished: 300
+ template:
+ spec:
+ containers:
+ — name: python-script
+ image: <registry_ip>:<registry_port>/<image_name>:latest
+ imagePullPolicy: Always
+ restartPolicy: OnFailure
